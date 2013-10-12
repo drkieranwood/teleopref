@@ -38,5 +38,5 @@ set(TELEOPREF_HEADER_FILES
 #target_link_libraries(${PROJECT_NAME} another_library)
 #rosbuild_add_boost_directories()
 #rosbuild_link_boost(${PROJECT_NAME} thread)
-rosbuild_add_executable(teleopref ${TELEOPREF_SOURCE_FILES} ${TELEOPREF_HEADER_FILES})
+#rosbuild_add_executable(teleopref ${TELEOPREF_SOURCE_FILES} ${TELEOPREF_HEADER_FILES})
 #target_link_libraries(example ${PROJECT_NAME})
