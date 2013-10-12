@@ -1,0 +1,17 @@
+<package>
+  <description brief="teleopref">
+
+     teleopref
+
+  </description>
+  <author>Kieran</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/imlim</url>
+  <depend package="roslib"/>
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  
+</package>
+
+
