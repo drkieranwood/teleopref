@@ -48,6 +48,7 @@ if __name__=="__main__":
     	settings = termios.tcgetattr(sys.stdin)
 	print msg
 
+	#Storage for the current reference position
 	XX=0.0
 	YY=0.0
 	ZZ=-1.0
@@ -59,6 +60,12 @@ if __name__=="__main__":
 	takeoff_pub = rospy.Publisher('/ardrone/takeoff', Empty)
 
 	rospy.init_node('teleopref')
+
+	twistinit = Twist()
+	twistinit.linear.x = XX; twistinit.linear.y = YY; twistinit.linear.z = ZZ
+	twistinit.angular.x = 0; twistinit.angular.y = 0; twistinit.angular.z = WW
+	print twistinit
+	pub.publish(twistinit)
 
 	try:
 		while(True):
