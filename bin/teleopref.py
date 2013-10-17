@@ -26,12 +26,12 @@ CTRL+c to quit
 
 #The key bindings. The magnitude of the change can be set here
 move_bindings = {
-		68:('linear', 'y', 0.1), #left
-		67:('linear', 'y', -0.1), #right
-		65:('linear', 'x', 0.1), #forward
-		66:('linear', 'x', -0.1), #back
-		'w':('linear', 'z', 0.1),
-		's':('linear', 'z', -0.1),
+		68:('linear', 'y', 0.06), #left
+		67:('linear', 'y', -0.06), #right
+		65:('linear', 'x', 0.06), #forward
+		66:('linear', 'x', -0.06), #back
+		'w':('linear', 'z', 0.01),
+		's':('linear', 'z', -0.01),
 		'a':('angular', 'z', 1),
 		'd':('angular', 'z', -1),
 	       }
@@ -51,7 +51,7 @@ if __name__=="__main__":
 	#Storage for the current reference position
 	XX=0.0
 	YY=0.0
-	ZZ=-1.0
+	ZZ=0.0
 	WW=0.0
 
 	pub = rospy.Publisher('ref_pose', Twist)
@@ -111,7 +111,7 @@ if __name__=="__main__":
 					WW=WW-speed
 
 				twist.linear.x = XX; twist.linear.y = YY; twist.linear.z = ZZ
-				twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = WW
+				twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = ((WW/(180.0))*(3.14159))
 			
 			# If the ctrl+c has been called then break the loop.
 			else:
@@ -119,8 +119,9 @@ if __name__=="__main__":
 					break
 			
 			# Publish the message 
-			print twist
 			pub.publish(twist)
+			twist.angular.z = WW
+			print twist
 
 	except Exception as e:
 		print e
