@@ -58,6 +58,7 @@ if __name__=="__main__":
 	land_pub = rospy.Publisher('/ardrone/land', Empty)
 	reset_pub = rospy.Publisher('/ardrone/reset', Empty)
 	takeoff_pub = rospy.Publisher('/ardrone/takeoff', Empty)
+	playback_pub = rospy.Publisher('ref_playback', Empty)
 
 	rospy.init_node('teleopref')
 
@@ -80,6 +81,8 @@ if __name__=="__main__":
 				reset_pub.publish(Empty())
 			if key == 't':
 				takeoff_pub.publish(Empty())
+			if key == 'p':
+				playback_pub.publish(Empty())
 			# If it is the escape key then get another two key presses
 			# Dunno why this is in here?
                         if ord(key) == 27:
@@ -111,14 +114,17 @@ if __name__=="__main__":
 					WW=WW-speed
 
 				twist.linear.x = XX; twist.linear.y = YY; twist.linear.z = ZZ
-				twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = ((WW/(180.0))*(3.14159))
+				twist.angular.x = 1; twist.angular.y = 0; twist.angular.z = ((WW/(180.0))*(3.14159))
 			
 			# If the ctrl+c has been called then break the loop.
-			else:
+			else:				
+				
 				if (key == '\x03'):
 					break
 			
 			# Publish the message 
+			twist.linear.x = XX; twist.linear.y = YY; twist.linear.z = ZZ
+			twist.angular.x = 1; twist.angular.y = 0; twist.angular.z = ((WW/(180.0))*(3.14159))
 			pub.publish(twist)
 			twist.angular.z = WW
 			print twist
