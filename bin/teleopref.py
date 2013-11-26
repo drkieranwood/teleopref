@@ -26,10 +26,10 @@ CTRL+c to quit
 
 #The key bindings. The magnitude of the change can be set here
 move_bindings = {
-		68:('linear', 'y', 0.06), #left
-		67:('linear', 'y', -0.06), #right
-		65:('linear', 'x', 0.06), #forward
-		66:('linear', 'x', -0.06), #back
+		68:('linear', 'y', 0.02), #left
+		67:('linear', 'y', -0.02), #right
+		65:('linear', 'x', 0.02), #forward
+		66:('linear', 'x', -0.02), #back
 		'w':('linear', 'z', 0.01),
 		's':('linear', 'z', -0.01),
 		'a':('angular', 'z', 1),
@@ -75,6 +75,7 @@ if __name__=="__main__":
 			key = getKey()
 
 			# If it is a (l, r, or t) takeoff and landing or emergency
+			# If p then activate playback mode.
 			if key == 'l':
 				land_pub.publish(Empty())
 			if key == 'r':
